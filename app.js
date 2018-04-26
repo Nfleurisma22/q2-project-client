@@ -6,38 +6,38 @@ window.addEventListener('load', event => {
   const newArtistButtonEl = document.getElementById('new-artist');
   const allArtistsEl = document.getElementById('all-artist');
   const artistsListEl = document.createElement('ul');
-  allPostsEl.appendChild(postsListEl);
-  const focusPostEl = document.getElementById('focus-post');
+  allPostsEl.appendChild(artistsListEl);
+  const focusArtistEl = document.getElementById('focus-artist');
   const deleteArtist = id => {
       axios.delete(`${baseURL}${id}`)
         .then(result => {
-          focusPostEl.innerHTML = '';
+          focusArtistEl.innerHTML = '';
           setTimeout(getAllArtists, 500);
         })
         .catch(error => { console.error(error); });
     }
 
-    const updatePost = (event, id) => {
+    const updateArtist = (event, id) => {
       const newTitle = document.getElementById('edit-artist-title').value;
       const newContent = document.getElementById('edit-artist-content').value;
       const newData = { title: newTitle, content: newContent };
       axios.put(`${baseURL}${id}`, newData)
         .then(result => {
           let update_id = result.data.id;
-          focusPostEl.innerHTML = '';
+          focusArtistEl.innerHTML = '';
           setTimeout(() => {
-            getAllPosts();
-            getOnePost(update_id);
+            getAllArtists();
+            getOneArtist(update_id);
           }, 500);
         })
         .catch(error => { console.error(error); });
       event.preventDefault();
     }
 
-    const editPost = artist => {
-      focusPostEl.innerHTML = '';
-      const editPostFormEl = document.createElement('form');
-      editPostFormEl.innerHTML = `
+    const editArtist = artist => {
+      focusArtistEl.innerHTML = '';
+      const editArtistFormEl = document.createElement('form');
+      editArtistFormEl.innerHTML = `
         <h4>Edit artist.</h4>
         <label>Title</label>
         <input type='text' id='edit-post-title' value='${artist.title}' />
@@ -45,45 +45,45 @@ window.addEventListener('load', event => {
         <label>Content</label>
         <textarea id='edit-artist-content'>${artistpost.content}</textarea>
         <br><br>
-        <button id='update-post'>Update.</button>`;
-      focusPostEl.appendChild(editPostFormEl);
-      document.getElementById('update-post').addEventListener('click', (event) => {
+        <button id='update-artist'>Update.</button>`;
+      focusArtistEl.appendChild(editArtistFormEl);
+      document.getElementById('update-artist').addEventListener('click', (event) => {
         event.preventDefault();
-        updatePost(event, artist.id);
+        updateArtist(event, artist.id);
       });
     }
 
-    const getOnePost = id => {
+    const getOneArtist = id => {
       axios.get( `${baseURL}${id}`)
         .then( response => {
-          focusPostEl.innerHTML = '';
-          const postTitleEl = document.createElement('h3');
-          postTitleEl.innerHTML = response.data.title;
-          const postContentEl = document.createElement('p');
-          postContentEl.innerHTML = response.data.content;
-          focusPostEl.appendChild(postTitleEl);
-          focusPostEl.appendChild(postContentEl);
+          focusArtistEl.innerHTML = '';
+          const artistTitleEl = document.createElement('h3');
+          artistTitleEl.innerHTML = response.data.title;
+          const artistContentEl = document.createElement('p');
+          artistContentEl.innerHTML = response.data.content;
+          focusArtistEl.appendChild(artistTitleEl);
+          focusArtistEl.appendChild(artistContentEl);
           const editButtonEl = document.createElement('button');
           editButtonEl.innerHTML = 'Edit.';
           editButtonEl.id = 'edit-post-button';
-          focusPostEl.appendChild(editButtonEl);
+          focusArtistEl.appendChild(editButtonEl);
           const deleteButtonEl = document.createElement('button');
           deleteButtonEl.innerHTML = 'Delete.';
-          deleteButtonEl.id = 'delete-post-button';
-          focusPostEl.appendChild(deleteButtonEl);
-          editButtonEl.addEventListener('click', () => { editPost(response.data); });
-          deleteButtonEl.addEventListener('click', () => { deletePost(response.data.id); });
+          deleteButtonEl.id = 'delete-artist-button';
+          focusArtistEl.appendChild(deleteButtonEl);
+          editButtonEl.addEventListener('click', () => { editArtist(response.data); });
+          deleteButtonEl.addEventListener('click', () => { deleteArtist(response.data.id); });
          })
         .catch( error => { console.error(error); });
     }
 
-    const createPost = event => {
-      const title = document.getElementById('new-post-title').value;
-      const content = document.getElementById('new-post-content').value;
+    const createArtist = event => {
+      const title = document.getElementById('new-artist-title').value;
+      const content = document.getElementById('new-artist-content').value;
       axios.post(`${baseURL}`, { title, content })
         .then( response => {
-          getAllPosts();
-          getOnePost(response.data.id);
+          getAllArtists();
+          getOneArtist(response.data.id);
         })
         .catch( error => { console.error( error ); });
       event.preventDefault();
