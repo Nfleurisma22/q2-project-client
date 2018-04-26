@@ -24,7 +24,7 @@ window.addEventListener('load', event => {
       axios.put(`${baseURL}${id}`, newData)
         .then(result => {
           let update_id = result.data.id;
-          focusArtistEl.innerHTML = '';
+          focusArtistEl.innerHTML = "";
           setTimeout(() => {
             getAllArtists();
             getOneArtist(update_id);
@@ -40,7 +40,7 @@ window.addEventListener('load', event => {
       editArtistFormEl.innerHTML = `
         <h4>Edit artist.</h4>
         <label>name</label>
-        <input type='text' id='edit-post-name' value='${artist.name}' />
+        <input type='text' id='edit-artist-name' value='${artist.name}' />
         <br><br>
         <label>country</label>
         <textarea id='edit-artist-country'>${artist.country}</textarea>
@@ -90,6 +90,7 @@ window.addEventListener('load', event => {
     }
 
     const newArtist = () => {
+      console.log('newArtistFunction');
       console.log('newArtistFunction');
       const newArtistFormEl = document.createElement('form');
       newArtistFormEl.innerHTML = `<h4>New artist.</h4>
