@@ -8,3 +8,43 @@ body, html{
   color: black;
 background-color: grey;
 }
+header {
+ background: #000000;
+ text-decoration: none;
+padding-top: 30px;
+min-height: 70px;
+border-bottom: #FF0000 3px solid;
+font-size: 16px;
+}
+
+#newsletter{
+  padding: 15px;
+  color: #fff;
+  background: grey;
+}
+
+#newsletter h1{
+  float: left;
+}
+
+#newsletter form{
+  float: right;
+  margin-top: 20px;
+}
+
+#newsletter input[type="email"]{
+  padding: 4px;
+  height: 25px;
+  width: 250px;
+}
+.button{
+  height: 37px;
+  border: 0;
+}
+
+footer{
+  padding: 20px;
+  color:grey;
+  background-color: Blue;
+  text-align: center;
+}
