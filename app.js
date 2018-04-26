@@ -18,9 +18,9 @@ window.addEventListener('load', event => {
     }
 
     const updateArtist = (event, id) => {
-      const newTitle = document.getElementById('edit-artist-title').value;
-      const newContent = document.getElementById('edit-artist-content').value;
-      const newData = { title: newTitle, content: newContent };
+      const newName = document.getElementById('edit-artist-name').value;
+      const newCountry = document.getElementById('edit-artist-country').value;
+      const newData = { name: newName, country: newCountry };
       axios.put(`${baseURL}${id}`, newData)
         .then(result => {
           let update_id = result.data.id;
@@ -39,11 +39,11 @@ window.addEventListener('load', event => {
       const editArtistFormEl = document.createElement('form');
       editArtistFormEl.innerHTML = `
         <h4>Edit artist.</h4>
-        <label>Title</label>
-        <input type='text' id='edit-post-title' value='${artist.title}' />
+        <label>name</label>
+        <input type='text' id='edit-post-name' value='${artist.name}' />
         <br><br>
-        <label>Content</label>
-        <textarea id='edit-artist-content'>${artistpost.content}</textarea>
+        <label>country</label>
+        <textarea id='edit-artist-country'>${artist.country}</textarea>
         <br><br>
         <button id='update-artist'>Update.</button>`;
       focusArtistEl.appendChild(editArtistFormEl);
@@ -57,12 +57,12 @@ window.addEventListener('load', event => {
       axios.get( `${baseURL}${id}`)
         .then( response => {
           focusArtistEl.innerHTML = '';
-          const artistTitleEl = document.createElement('h3');
-          artistTitleEl.innerHTML = response.data.name;
-          const artistContentEl = document.createElement('p');
-          artistContentEl.innerHTML = response.data.country;
-          focusArtistEl.appendChild(artistTitleEl);
-          focusArtistEl.appendChild(artistContentEl);
+          const artistNameEl = document.createElement('h3');
+          artistNameEl.innerHTML = response.data.name;
+          const artistCountryEl = document.createElement('p');
+          artistCountryEl.innerHTML = response.data.country;
+          focusArtistEl.appendChild(artistNameEl);
+          focusArtistEl.appendChild(artistCountryEl);
           const editButtonEl = document.createElement('button');
           editButtonEl.innerHTML = 'Edit.';
           editButtonEl.id = 'edit-artist-button';
@@ -78,9 +78,9 @@ window.addEventListener('load', event => {
     }
 
     const createArtist = event => {
-      const title = document.getElementById('new-artist-title').value;
-      const content = document.getElementById('new-artist-content').value;
-      axios.post(`${baseURL}`, { title, content })
+      const name = document.getElementById('new-artist-name').value;
+      const country = document.getElementById('new-artist-country').value;
+      axios.post(`${baseURL}`, { name, country })
         .then( response => {
           getAllArtists();
           getOneArtist(response.data.id);
@@ -90,18 +90,19 @@ window.addEventListener('load', event => {
     }
 
     const newArtist = () => {
+      console.log('newArtistFunction');
       const newArtistFormEl = document.createElement('form');
       newArtistFormEl.innerHTML = `<h4>New artist.</h4>
-        <label>Title</label>
-        <input type='text' id='new-artist-title' />
+        <label>name</label>
+        <input type='text' id='new-artist-name' />
         <br><br>
-        <label>Content</label>
-        <textarea id='new-artist-content'></textarea>
+        <label>country</label>
+        <textarea id='new-artist-country'></textarea>
         <br><br>
         <button id='create-artist'>Submit.</button>`;
       focusArtistEl.innerHTML = '';
       focusArtistEl.appendChild(newArtistFormEl);
-      document.getElementById('create-artist').addEventListener('click', createPost);
+      document.getElementById('create-artist').addEventListener('click', createArtist);
     }
 
     const getAllArtists= () => {
@@ -118,7 +119,7 @@ window.addEventListener('load', event => {
         .catch( error => { console.error(error); });
     }
 
-    //newArtistButtonEl.addEventListener('click', newArtist);
+    newArtistButtonEl.addEventListener('click', newArtist);
     getAllArtists();
 
   });
