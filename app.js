@@ -2,11 +2,11 @@ window.addEventListener('load', event => {
 
   console.log('Music Blog Client: ready to GO!');
 
-  const baseURL = 'http://localhost:3002/api/artists/';
+  const baseURL = 'http://localhost:3002/artists/';
   const newArtistButtonEl = document.getElementById('new-artist');
   const allArtistsEl = document.getElementById('all-artist');
   const artistsListEl = document.createElement('ul');
-  allPostsEl.appendChild(artistsListEl);
+  allArtistsEl.appendChild(artistsListEl);
   const focusArtistEl = document.getElementById('focus-artist');
   const deleteArtist = id => {
       axios.delete(`${baseURL}${id}`)
@@ -58,14 +58,14 @@ window.addEventListener('load', event => {
         .then( response => {
           focusArtistEl.innerHTML = '';
           const artistTitleEl = document.createElement('h3');
-          artistTitleEl.innerHTML = response.data.title;
+          artistTitleEl.innerHTML = response.data.name;
           const artistContentEl = document.createElement('p');
-          artistContentEl.innerHTML = response.data.content;
+          artistContentEl.innerHTML = response.data.country;
           focusArtistEl.appendChild(artistTitleEl);
           focusArtistEl.appendChild(artistContentEl);
           const editButtonEl = document.createElement('button');
           editButtonEl.innerHTML = 'Edit.';
-          editButtonEl.id = 'edit-post-button';
+          editButtonEl.id = 'edit-artist-button';
           focusArtistEl.appendChild(editButtonEl);
           const deleteButtonEl = document.createElement('button');
           deleteButtonEl.innerHTML = 'Delete.';
@@ -107,10 +107,10 @@ window.addEventListener('load', event => {
     const getAllArtists= () => {
       axios.get( baseURL )
         .then( response => {
-          artistListEl.innerHTML = '';
+          artistsListEl.innerHTML = '';
           response.data.forEach( item => {
             let artistListItemEl = document.createElement('li');
-            artistListItemEl.innerHTML = item.title;
+            artistListItemEl.innerHTML = item.name;
             artistListItemEl.addEventListener('click', id => { getOneArtist(item.id); });
             artistsListEl.appendChild(artistListItemEl);
           })
@@ -118,7 +118,7 @@ window.addEventListener('load', event => {
         .catch( error => { console.error(error); });
     }
 
-    newArtistButtonEl.addEventListener('click', newArtist);
-    getAllPosts();
+    //newArtistButtonEl.addEventListener('click', newArtist);
+    getAllArtists();
 
   });
