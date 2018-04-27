@@ -5,11 +5,13 @@ body, html{
   font-family: "Times", sans-serif;
   font-weight: 400;
   line-height: 1.5em;
-background-image: url('./img/roots.jpg');
+background-color: teal;
+background-image: url('./img/roots2.jpg');
+background: teal;
 background-repeat: no-repeat;
 background-size: cover;
 background-attachment: fixed;
-color: blue;
+color: black;
 }
 .container{
   width:80%;
@@ -77,7 +79,7 @@ header #branding h1{
 
 footer{
   padding: 20px;
-  color:grey;
-  background-color: Blue;
+  color:blue;
+  background-color: teal;
   text-align: center;
 }
