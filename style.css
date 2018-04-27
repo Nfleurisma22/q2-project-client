@@ -5,22 +5,54 @@ body, html{
   font-family: "Times", sans-serif;
   font-weight: 400;
   line-height: 1.5em;
-  color: black;
-background-color: grey;
+background-image: url('./img/roots.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+background-attachment: fixed;
+color: blue;
 }
+.container{
+  width:80%;
+  margin: auto;
+  overflow: hidden;
+}
+
 header {
- background: #000000;
  text-decoration: none;
 padding-top: 30px;
 min-height: 70px;
-border-bottom: #FF0000 3px solid;
+border-bottom: 3px solid;
 font-size: 16px;
 }
+
+header ul{
+  float: right;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+  color: blue;
+}
+
+header #branding{
+  float: left;
+}
+header #branding h1{
+  margin: 0 ;
+}
+ header .highlight, header .current a{
+   color: Blue;
+   font-weight: bold;
+ }
+
+ header a:hover{
+   color: #cccccc;
+   font-weight: bold;
+ }
 
 #newsletter{
   padding: 15px;
   color: #fff;
-  background: grey;
+  background: blue;
 }
 
 #newsletter h1{
@@ -41,6 +73,7 @@ font-size: 16px;
   height: 37px;
   border: 0;
 }
+
 
 footer{
   padding: 20px;
